@@ -26,6 +26,9 @@ func ParseLine(line string) kvheap.KeyVal {
 func ToySort(r io.Reader, n int) []kvheap.KeyVal {
 	top := kvheap.NewKVTopN(n)
 	scanner := bufio.NewScanner(r)
+	buf := make([]byte, 16*1024*1024)
+	scanner.Buffer(buf, 64*1024)
+
 	for scanner.Scan() {
 		if err := scanner.Err(); err != nil {
 			log.Fatalf("error reading file %v", err)

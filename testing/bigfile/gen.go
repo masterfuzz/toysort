@@ -1,13 +1,14 @@
 package main
 
 import (
+	"bufio"
+	"flag"
 	"fmt"
-	"sort"
 	"log"
 	"math"
 	"math/rand"
 	"os"
-	"flag"
+	"sort"
 
 	"github.com/masterfuzz/toysort/pkg/kvheap"
 )
@@ -43,6 +44,8 @@ func main() {
 		panic(err)
 	}
 	defer qf.Close()
+	bq := bufio.NewWriter(qf)
+
 	af, err := os.Create(*answerFile)
 	if err != nil {
 		panic(err)
@@ -51,7 +54,7 @@ func main() {
 
 	for _, kv := range ans {
 		fmt.Fprintf(af, "%s\n", kv.Key)
-		fmt.Fprintf(qf, "%s %d\n", kv.Key, kv.Val)
+		fmt.Fprintf(bq, "%s %d\n", kv.Key, kv.Val)
 	}
 	af.Close()
 
@@ -60,9 +63,8 @@ func main() {
 			Key: fmt.Sprintf(form, i+11),
 			Val: rand.Int63n(halfMax),
 		}
-		fmt.Fprintf(qf, "%s %d\n", kv.Key, kv.Val)
+		fmt.Fprintf(bq, "%s %d\n", kv.Key, kv.Val)
 	}
 
-	log.Printf("generated %d lines", *lines + *topN)
+	log.Printf("generated %d lines", *lines+*topN)
 }
-

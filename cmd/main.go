@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"os"
-	"flag"
 
 	"github.com/masterfuzz/toysort/pkg"
 )
