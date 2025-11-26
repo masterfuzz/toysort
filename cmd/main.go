@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"flag"
 
 	"github.com/masterfuzz/toysort/pkg"
 )
 
 func main() {
+	topN := flag.Int("n", 10, "maximum entries in the output")
+
 	scanner := bufio.NewScanner(os.Stdin)
 
 	var fname string
@@ -26,7 +29,7 @@ func main() {
 	}
 	defer file.Close()
 
-	sorted := pkg.ToySort(file, 10)
+	sorted := pkg.ToySort(file, *topN)
 	for _, s := range sorted {
 		fmt.Println(s.Key)
 	}
