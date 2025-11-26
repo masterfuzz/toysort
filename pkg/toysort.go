@@ -10,7 +10,7 @@ import (
 	"github.com/masterfuzz/toysort/pkg/kvheap"
 )
 
-func parseLine(line string) kvheap.KeyVal {
+func ParseLine(line string) kvheap.KeyVal {
 	splits := strings.Split(line, " ")
 	v, err := strconv.ParseInt(splits[1], 10, 64)
 	if err != nil {
@@ -33,7 +33,7 @@ func ToySort(r io.Reader, n int) []kvheap.KeyVal {
 
 		line := scanner.Text()
 
-		top.Push(parseLine(line))
+		top.Push(ParseLine(line))
 	}
 
 	return top.TopN()

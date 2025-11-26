@@ -12,6 +12,7 @@ import (
 
 func main() {
 	topN := flag.Int("n", 10, "maximum entries in the output")
+	flag.Parse()
 
 	scanner := bufio.NewScanner(os.Stdin)
 
