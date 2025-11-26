@@ -1,11 +1,11 @@
-package pkg_test
+package kvheap_test
 
 import (
 	"container/heap"
 	"fmt"
 	"testing"
 
-	. "github.com/masterfuzz/toysort/pkg"
+	. "github.com/masterfuzz/toysort/pkg/kvheap"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -30,14 +30,18 @@ func TestHeap(t *testing.T) {
 }
 
 func TestTopN(t *testing.T) {
+	tokv := func(i int) KeyVal {
+		return KeyVal{Key: fmt.Sprintf("%d", i), Val: int64(i)}
+	}
+
 	top := NewKVTopN(5)
 	for i := range 20 {
-		top.Push(KeyVal{Key: fmt.Sprintf("%d", i), Val: int64(i)})
+		top.Push(tokv(i))
 	}
 
 	assert.Equal(t, 5, top.Items.Len())
 	fmt.Printf("%v", top.Items)
 	assert.Equal(t, int64(15), top.Pop().Val)
 
-	assert.Equal(t, []string{"19", "18", "17", "16"}, top.TopN())
+	assert.Equal(t, []KeyVal{tokv(19), tokv(18), tokv(17), tokv(16)}, top.TopN())
 }
