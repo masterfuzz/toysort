@@ -29,9 +29,9 @@ func FuzzToySort(f *testing.F) {
 		// Helper to add a key-value pair
 		addKeyVal := func(key []byte, val int64) {
 			// Keys must be non-whitespace
-			keyStr := string(bytes.ReplaceAll(key, []byte{' '}, []byte{}))
-			keyStr = string(bytes.ReplaceAll([]byte(keyStr), []byte{'\n'}, []byte{}))
-			keyStr = string(bytes.ReplaceAll([]byte(keyStr), []byte{'\t'}, []byte{}))
+			keyStr := bytes.ReplaceAll(key, []byte{' '}, []byte{})
+			keyStr = bytes.ReplaceAll([]byte(keyStr), []byte{'\n'}, []byte{})
+			keyStr = bytes.ReplaceAll([]byte(keyStr), []byte{'\t'}, []byte{})
 			if len(keyStr) == 0 {
 				return
 			}

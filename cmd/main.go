@@ -32,7 +32,7 @@ func main() {
 
 	sorted := pkg.ToySort(file, *topN)
 	for _, s := range sorted {
-		fmt.Println(s.Key)
+		fmt.Println(string(s.Key))
 	}
 
 }

@@ -31,7 +31,7 @@ func main() {
 	ans := []kvheap.KeyVal{}
 	for i := range *topN {
 		ans = append(ans, kvheap.KeyVal{
-			Key: fmt.Sprintf(form, i),
+			Key: fmt.Appendf(nil, form, i),
 			Val: halfMax + 1 + rand.Int63n(maxInt64-halfMax),
 		})
 	}
@@ -60,7 +60,7 @@ func main() {
 
 	for i := range *lines {
 		kv := kvheap.KeyVal{
-			Key: fmt.Sprintf(form, i+11),
+			Key: fmt.Appendf(nil, form, i+11),
 			Val: rand.Int63n(halfMax),
 		}
 		fmt.Fprintf(bq, "%s %d\n", kv.Key, kv.Val)

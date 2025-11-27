@@ -3,7 +3,7 @@ package kvheap
 import "container/heap"
 
 type KeyVal struct {
-	Key string
+	Key []byte
 	Val int64
 }
 

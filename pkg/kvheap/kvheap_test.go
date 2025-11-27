@@ -12,11 +12,11 @@ import (
 func TestHeap(t *testing.T) {
 	h := &KeyValHeap{
 		KeyVal{
-			Key: "a",
+			Key: []byte("a"),
 			Val: 10,
 		},
 		KeyVal{
-			Key: "a",
+			Key: []byte("a"),
 			Val: 6,
 		},
 	}
@@ -31,7 +31,7 @@ func TestHeap(t *testing.T) {
 
 func TestTopN(t *testing.T) {
 	tokv := func(i int) KeyVal {
-		return KeyVal{Key: fmt.Sprintf("%d", i), Val: int64(i)}
+		return KeyVal{Key: fmt.Appendf(nil, "%d", i), Val: int64(i)}
 	}
 
 	top := NewKVTopN(5)
